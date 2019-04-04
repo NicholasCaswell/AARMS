@@ -355,7 +355,7 @@ function myFunction() {
       filt0 = 0;
       break;
   }
-  console.log(filt0);
+  //console.log(filt0);
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 1; i < tr.length; i++) {
