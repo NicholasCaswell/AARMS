@@ -1,6 +1,4 @@
-PHP Website displaying contents of Item Database. 
-Do not use or take any source code from this site, property of General Dynamics Mission Systems.
-
+<h1 style="text-align: center;">AARMS<h1>
 Project Notes
 - All code for this project is located in index.php file
 - CSS, then HTML, PHP/MySQL
@@ -19,3 +17,5 @@ Javascript
 
 HTML/CSS
 - Follow class,id for all html <div> tags.
+
+Do not use or take any source code from this site, property of General Dynamics Mission Systems.
