@@ -61,7 +61,7 @@
 
 .rack1{
   border: 10px solid blue;
-  width: 300px;
+  width: 500px;
   padding: 5px;
   margin: 25px;
   text-align: center;
@@ -70,14 +70,14 @@
 
 .rack2{
   border: 10px solid gray;
-  width: 300px;
+  width: 500px;
   padding: 5px;
   margin: 25px;
   text-align: center;
   border-radius: 25px;
 }
 
-.rack3{
+.notread, .inlab{
   border: 10px solid blue;
   width: 300px;
   padding: 5px;
@@ -133,7 +133,7 @@ table.center{
 
 .square {
   position: relative;
-  width: 10%;
+  width: 40%;
   text-align: center;
   align-content: center;
 }
@@ -181,10 +181,11 @@ table.center{
 </head>
 <?php
 header("refresh: 3600;");
-$to = "nwcaswell@gmail.com";
+$to = "nwcaswell@gmail.com, 5087898495@vtext.com";
 $subject = "RFID Asset Management System";
 //The following message should be a format for any changed items, if doable, to be sent in an email to an administrator. 
 $message = <<<EOF
+System Updated
 <html>
 <head>
 <title>RFID Asset Management Update</title>
@@ -202,9 +203,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 $headers .= 'From: <notifier@aarms.com>' . "\r\n";
 //$headers .= 'Cc: administrator@aarms.com' . "\r\n";
 
-if(mail($to,$subject,$message,$headers) == true){
- // echo "Email sent successfully";
-}
+//EMAIL CODE WAS HERE
 
 // Check connection
 // if ($conn->connect_error) {
@@ -219,7 +218,7 @@ if(mail($to,$subject,$message,$headers) == true){
 
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'GeoMap')">GeoMap</button>
-  <button class="tablinks" onclick="openCity(event, 'Filters')">Filters</button>
+  <button class="tablinks" onclick="openCity(event, 'Filters')">Search</button>
   <form>
    <!-- <input type="text" name="search" placeholder="filter"> -->
     <input type="text" id="myInput" onkeyup="myFunction()" name="valueToSearch" placeholder="Search for items..">
@@ -241,21 +240,161 @@ if(mail($to,$subject,$message,$headers) == true){
 <div class="container">
   <div class="row">
     <div class="rack1 square"> 
-      <div class="content">
+      <div style="overflow-x: auto; overflow-y:auto;" class="content">
         Rack 1
+        <table>
+        <tr>
+         <th>ID</th><br>
+         <th>Serial Number</th>
+         <th> RFID Number</th>
+         <th> Government Tag</th>
+         <th> Location</th><br> <!--Not sure if this needs to be here, not sure how it got here -->
+         <th> Last Access</th>
+         <th> Current Access</th>
+       </tr>
+        <?php 
+        $servername = "sql9.freemysqlhosting.net";
+        $username = "sql9274501";
+        $password = "prU3lkXDec";
+        $db_name =  "sql9274501";
+        $sql = "SELECT * FROM items";
+        $link = mysqli_connect($servername, $username, $password, $db_name);
+        $result = mysqli_query($link, "SELECT * FROM items WHERE LOCATION = 'Rack_1'", MYSQLI_USE_RESULT);
+         ?>
+         <?php while($row = $result->fetch_assoc()):?>
+     <tr>
+       <th><?php echo $row['ID']?></th>
+       <th><?php echo $row['SERIAL_NUMBER']?></th>
+       <th><?php echo $row['RFID_NUMBER']?></th>
+       <th><?php echo $row['GOVERNMENT_TAG']?></th>
+       <th><?php echo $row['LOCATION']?></th>
+       <th><?php echo $row['LAST_ACCESS']?></th>
+       <th><?php echo $row['CURRENT_ACCESS']?></th>
+     </tr>
+     
+  <?php endwhile; ?>
+  </table>
       </div>
     </div>
     <div class="rack2 square">
-      <div class="content">
+      <div style="overflow-x: auto; overflow-y:auto;" class="content">
         Rack 2
+        <table>
+        <tr>
+         <th>ID</th><br>
+         <th>Serial Number</th>
+         <th> RFID Number</th>
+         <th> Government Tag</th>
+         <th> Location</th><br> <!--Not sure if this needs to be here, not sure how it got here -->
+         <th> Last Access</th>
+         <th> Current Access</th>
+       </tr>
+       <?php 
+        $servername = "sql9.freemysqlhosting.net";
+        $username = "sql9274501";
+        $password = "prU3lkXDec";
+        $db_name =  "sql9274501";
+        $sql = "SELECT * FROM items";
+        $link = mysqli_connect($servername, $username, $password, $db_name);
+        $result = mysqli_query($link, "SELECT * FROM items WHERE LOCATION = 'Rack_2'", MYSQLI_USE_RESULT);
+        ?>
+        <?php while($row = $result->fetch_assoc()):?>
+     <tr>
+       <th><?php echo $row['ID']?></th>
+       <th><?php echo $row['SERIAL_NUMBER']?></th>
+       <th><?php echo $row['RFID_NUMBER']?></th>
+       <th><?php echo $row['GOVERNMENT_TAG']?></th>
+       <th><?php echo $row['LOCATION']?></th>
+       <th><?php echo $row['LAST_ACCESS']?></th>
+       <th><?php echo $row['CURRENT_ACCESS']?></th>
+     </tr>
+     
+  <?php endwhile; ?>
+  </table>
       </div>
     </div>
+    <div class="inlab square">
+      <div style="overflow-x: auto; overflow-y:auto;" class="content">
+        In Lab, not in a Rack
+        <table>
+        <tr>
+         <th>ID</th><br>
+         <th>Serial Number</th>
+         <th> RFID Number</th>
+         <th> Government Tag</th>
+         <th> Location</th><br> <!--Not sure if this needs to be here, not sure how it got here -->
+         <th> Last Access</th>
+         <th> Current Access</th>
+       </tr>
+       <?php 
+        $servername = "sql9.freemysqlhosting.net";
+        $username = "sql9274501";
+        $password = "prU3lkXDec";
+        $db_name =  "sql9274501";
+        $sql = "SELECT * FROM items";
+        $link = mysqli_connect($servername, $username, $password, $db_name);
+        $result = mysqli_query($link, "SELECT * FROM items WHERE LOCATION = 'In Lab, not in Rack'", MYSQLI_USE_RESULT);
+        ?>
+        <?php while($row = $result->fetch_assoc()):?>
+     <tr>
+       <th><?php echo $row['ID']?></th>
+       <th><?php echo $row['SERIAL_NUMBER']?></th>
+       <th><?php echo $row['RFID_NUMBER']?></th>
+       <th><?php echo $row['GOVERNMENT_TAG']?></th>
+       <th><?php echo $row['LOCATION']?></th>
+       <th><?php echo $row['LAST_ACCESS']?></th>
+       <th><?php echo $row['CURRENT_ACCESS']?></th>
+     </tr>
+     
+  <?php endwhile; ?>
+  </table>
+      </div>
+    </div>
+    <div class="notread square">
+      <div style="overflow-x: auto; overflow-y:auto;" class="content">
+        Not Read
+        <table>
+        <tr>
+         <th>ID</th><br>
+         <th>Serial Number</th>
+         <th> RFID Number</th>
+         <th> Government Tag</th>
+         <th> Location</th><br> <!--Not sure if this needs to be here, not sure how it got here -->
+         <th> Last Access</th>
+         <th> Current Access</th>
+       </tr>
+       <?php 
+        $servername = "sql9.freemysqlhosting.net";
+        $username = "sql9274501";
+        $password = "prU3lkXDec";
+        $db_name =  "sql9274501";
+        $sql = "SELECT * FROM items";
+        $link = mysqli_connect($servername, $username, $password, $db_name);
+        $result = mysqli_query($link, "SELECT * FROM items WHERE LOCATION = 'Not Read'", MYSQLI_USE_RESULT);
+        ?>
+        <?php while($row = $result->fetch_assoc()):?>
+     <tr>
+       <th><?php echo $row['ID']?></th>
+       <th><?php echo $row['SERIAL_NUMBER']?></th>
+       <th><?php echo $row['RFID_NUMBER']?></th>
+       <th><?php echo $row['GOVERNMENT_TAG']?></th>
+       <th><?php echo $row['LOCATION']?></th>
+       <th><?php echo $row['LAST_ACCESS']?></th>
+       <th><?php echo $row['CURRENT_ACCESS']?></th>
+     </tr>
+     
+  <?php endwhile; ?>
+  </table>
+      </div>
+    </div>
+    <!--<div class="rack3 notread "-->
+    
  </div>
 
 </div>
 </div>
 
-<div id="Filters" class="tabcontent">
+<div id="Search" class="tabcontent">
 </div>
 </div>
 
@@ -365,7 +504,26 @@ function myFunction() {
 function autoUpdate(){
   document.location.reload(true);
 }
+
 </script>
+<div class="content other_functions">
+  <div class="row reload">
 <button class="reload" onclick="autoUpdate()">Update</button>
+<h4 class="reload">Notifications for Administrator</h4>
+<form method="post" action="/index.php" class="reload">
+  <input type="submit" value="On" name="On">
+  <input type="submit" value="Off" name="Off">
+</form>
+</div>
+</div>
+<?php 
+if(isset($_POST["On"])){
+  $to = "nwcaswell@gmail.com, 5087898495@vtext.com";
+}
+else if(isset($_POST["Off"])){
+  $to = "ncaswell@umassd.edu";
+}
+mail($to,$subject,$message,$headers);
+?>
 </body>
 </html>
