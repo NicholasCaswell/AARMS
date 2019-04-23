@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">AARMS<h1>
+<h1 style="text-align: center;">AARMS</h1>
 Project Notes
 - All code for this project is located in index.php file
 - CSS, then HTML, PHP/MySQL
